@@ -36,17 +36,15 @@ class CopyAssets extends Command
         $from = base_path($from);
         $to = base_path($to.'/frontend');
 
-        $gitPullResult = Process::path(base_path())->run("git pull");
+        $gitPullResult = Process::path($from)->run("git pull");
         if(trim($gitPullResult->output()) == 'Already up to date.') {
             $this->warn('Assets are already up to date.');
-            return;
         }else{
-            $this->success('Assets pulled successfully!');
+            $this->info('Assets pulled successfully!');
         }
 
         if($gitPullResult->errorOutput() != ''){
             $this->error('Failed to pull assets: '.$gitPullResult->errorOutput());
-            return;
         }
 
         try {
