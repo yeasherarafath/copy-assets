@@ -43,7 +43,7 @@ class CopyAssets extends Command
             $this->info('Assets pulled successfully!');
         }
 
-        if($gitPullResult->successful){
+        if(!$gitPullResult->successful){
             $this->error('Failed to pull assets: '.$gitPullResult->errorOutput());
         }
 
